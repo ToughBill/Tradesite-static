@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>my动画轮播图</title>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <style>
+        *{
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+        }
+        .carousel{
+            width: 530px;
+            height: 280px;
+            overflow: hidden;
+            position: relative;
+        }
+        .carousel .imgList{
+            width: 9999px;
+            position: absolute;
+
+        }
+        .carousel .imgList>li{
+            float: left;
+        }
+        .carousel .imgList>li>img{
+            width: 530px;
+        }
+        .carousel span{
+            display: inline-block;
+            width: 30px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.5);
+            position: absolute;
+            top: 50%;
+            transform:translate(0,-50%);
+            cursor: pointer;
+        }
+        .carousel span:hover{
+            background: red;
+        }
+        .carousel .left{left: 20px;}
+        .carousel .right{right:20px;}
+        .carousel .numList{
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translate(-50%,0);
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .carousel .numList li{
+            float: left;
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
+            text-align: center;
+            margin-right: 10px;
+            background: rgba(255,255,255,0.8);
+        }
+        .carousel .numList li.current{
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel">
+        
+        <ul class="imgList">
+            <li><img src="20190215111605365.webp" alt="">1</li>
+            <li><img src="20190215111605365.webp" alt="">2</li>
+            <li><img src="20190215111605365.webp" alt="">3</li>
+            <li><img src="20190215111605365.webp" alt="">4</li>
+            <li><img src="20190215111605365.webp" alt="">5</li>
+            <li><img src="20190215111605365.webp alt="">6</li>
+        </ul>
+        <ol class="numList">            
+        </ol>       
+        <span class="left">1</span>
+        <span class="right">2</span>
+    </div>
+    <input type="text">
+</body>
+</html>
+<script>
+$(function(){
+    var imgListLength=$('.imgList>li>img').length;
+    var imgListItemWidth=$('.imgList>li').width()
+    var imgListWidth=$('.imgList>li>img').width()*imgListLength;
+    var $firstImg = $('.imgList>li').eq(0).clone();
+    $('.imgList').append($firstImg);
+    var time;
+    var num=0;
+    var temporaryNum=0;
+    // 根据图片张数，添加小圆。
+    for(var i=0;i<imgListLength;i++){
+        $('.numList').append('<li>'+(i+1)+'</li>');
+    }
+    $('.numList>li').eq(0).addClass('current');
+
+    var Fun={
+        /**
+        *@method 移动图片和当前图片所在
+        *@data  2018-09-08
+        *@param {number} moveNum 需要移动的索引 
+        *@param {number} currentNum 相让用户看到当前图片所在的索引
+        */
+        moveImg:function(moveNum,currentNum){
+            //console.log(moveNum,currentNum);    
+            $('.carousel .imgList').animate({'left':'-'+moveNum*imgListItemWidth+'px'});
+            $('.carousel .numList>li').eq(currentNum).addClass('current').siblings().removeClass('current');
+        }
+    }
+
+    // 定时器
+    var autoCarousel = function(){
+        time=setInterval(function(){
+            num++;
+            temporaryNum++;
+            if(temporaryNum >= imgListLength){
+                temporaryNum=0;
+            }
+            if(num>imgListLength){
+                num = 0;
+                $('.carousel .imgList').css({'left':'-'+num*imgListItemWidth+'px'});
+                num = 1;
+            }
+            Fun.moveImg(num,temporaryNum)
+        },1000)
+    }
+
+    autoCarousel()
+    $('body').on('mouseenter','.carousel',function(){
+        clearInterval(time);
+    })
+    $('body').on('mouseleave','.carousel',function(){
+        autoCarousel();
+    })
+
+    $('.carousel').on('click','.numList>li',function(){
+        var currentIndex = $(this).index();
+        num=currentIndex;
+        Fun.moveImg(num,num);
+    })
+
+    $('.carousel').on('click','.right',function(){
+        num++;
+        temporaryNum = num;
+        if(temporaryNum==imgListLength){
+            temporaryNum = 0;
+        }
+        if(num>imgListLength){
+            num=0;          
+            $('.carousel .imgList').css({'left':'-'+num*imgListItemWidth+'px'});
+            num=1;
+            temporaryNum = 1;
+        }
+        Fun.moveImg(num,temporaryNum);
+    })
+    
+    $('.carousel').on('click','.left',function(){
+        num--;
+        temporaryNum = num; 
+        if(num < 0){
+            temporaryNum = imgListLength-1;
+            num = imgListLength;
+            $('.carousel .imgList').css({'left':'-'+num*imgListItemWidth+'px'});
+            num = imgListLength-1;
+        }
+        Fun.moveImg(num,num);
+    })
+});
+</script>
+<!-- 索引0显示的是第1张，以此类推，索引6就是第7张
+第7张图和第1张图是一样的。如果是索引7就用css({'left',''})移动到第2张图，因为这样就不会有移动的动画
+
+ -->

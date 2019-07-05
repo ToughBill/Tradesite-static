@@ -1,0 +1,43 @@
+@charset "utf-8";
+#carouselDiv{
+    height: auto;
+    margin-bottom: 0px;
+}
+#carouselDiv .flex-control-nav{
+    display: none;
+}
+.carouselPic{
+    display: inline;
+    padding: 10px;
+}
+.carouselPic img{
+    width:284px;
+    height: 213px;
+}
+.paddig20{
+    padding-top: 20px;
+}
+.peoplename{
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 15px;
+    color: #00b7c9;
+}
+.team-member .deg{
+    font-size: 12px;
+    color: #656565;
+    /* margin-top: 16px; */
+    line-height: 26px;
+}
+.memberPic{
+    width: 280px;
+    height: 210px;
+}
+
+@media (max-width: 480px){
+    #compImg img{
+        width: 100%;
+        height: auto !important;
+    }
+}

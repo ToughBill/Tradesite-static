@@ -1,0 +1,129 @@
+.productPic{
+    width: 100%;
+    border-radius: 2px 2px 0 0;
+}
+.productDesc{
+    padding-top: 15px;
+}
+.productDesc p{
+    text-align: center;
+    font-size: 14px;
+    color: #878787;
+    font-family: Microsoft YaHei,Arial;
+}
+.productPic{
+    cursor: pointer;
+    transition: all 0.4s;
+    overflow: hidden;
+}
+.productPic:hover{
+    transform: translate(-50%,-50%) scale(1.1);
+}
+#search{
+    margin: 0px;
+    padding: 0px;
+}
+.row .row, .row-fluid .row-fluid {
+     margin-bottom: 15px;
+ }
+.rightArrow{
+    float:right;
+    display: block;
+    width: 5px;
+    height: 9px;
+    background: url("../img/rightArrow.png") no-repeat;
+    margin-top: 10px;
+}
+.searchDiv{
+    border: 1px solid silver;
+    border-radius: 6px;
+    height: 30px;
+    padding-left: 10px;
+}
+.searchDiv:hover{
+    border-color:rgb(54, 134, 255);
+}
+.searchDiv:hover #searchBtn{
+    background-color: rgb(54, 134, 255);
+    color: white;
+}
+#searchInput{
+    width: calc(100% - 78px);
+    height: 100%;
+    line-height: 38px;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    outline: none;
+}
+#searchBtn{
+    height: 100%;
+    border: 0px;
+    width: 70px;
+    float: right;
+    border-radius: 0px 6px 6px 0px !important;
+}
+#productTitle{
+    height: 42px;
+    line-height: 42px;
+    color: rgba(255,255,255,1);
+    border-color: rgba(1, 177, 175, 1);
+    border-width: 0px;
+    border-radius: 0px;
+    background-color: rgb(3, 108, 173);
+    text-align: center;
+    font-size: 16px;
+}
+
+.cateLi p:hover{
+    color: rgb(54, 134, 255);
+}
+.cateLi p{
+    color: #555;
+    margin-bottom: 0px;
+    padding: 3px 0px;
+    width: calc(100% - 30px);
+    display: inline-block;
+}
+.cateLi.active{
+    background-color: rgb(54, 134, 255);
+    border-radius: 6px;
+}
+.cateLi.active p{
+    color: white;
+}
+.productDiv{
+    height: 230px;
+}
+.productPicDiv{
+    height: calc(100% - 60px) !important;
+    position: relative;
+}
+.marginBottom15{
+    margin-bottom: 15px;
+}
+.productPic{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    cursor: pointer;
+    transition: all 0.6s;
+    padding: 10px;
+}
+.attrTitle{
+    text-align: right;
+}
+#prodocuts-title{
+    color: #3688ff;
+    line-height: 1.5rem;
+    font-size: 30px;
+    text-align: center;
+    padding-bottom: 16px;
+}
+
+@media (max-width: 480px){
+    #prodocuts-title{
+        padding-bottom: 0px !important;
+    }
+}
